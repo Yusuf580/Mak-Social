@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>MakSocial - Intelligence Registry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                primary: '#475569', 
+                secondary: '#334155',
+                accent: '#94a3b8'
+              },
+              primary: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              }
+            },
+            borderRadius: {
+              'custom': '2px',
+            },
+            fontFamily: {
+              mono: ['"JetBrains Mono"', 'monospace'],
+              sans: ['"JetBrains Mono"', 'monospace'], 
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+          --bg-primary: #ffffff;
+          --bg-secondary: #f8fafc;
+          --text-primary: #1e293b;
+          --text-secondary: #475569;
+          --border-color: #e2e8f0;
+          --brand-primary: #475569; 
+          --radius-main: 2px;
+        }
+
+        .dark {
+          --bg-primary: #0d0d0d; 
+          --bg-secondary: #161616;
+          --text-primary: #e2e8f0;
+          --text-secondary: #94a3b8;
+          --border-color: #2a2a2a;
+          --brand-primary: #475569;
+        }
+
+        body {
+            font-family: "JetBrains Mono", monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.02em;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        .post-content-markdown h1 { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.75rem; color: #475569; }
+        .post-content-markdown h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #64748b; }
+        .post-content-markdown h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .post-content-markdown p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .post-content-markdown a { color: #475569; text-decoration: underline; font-weight: 700; }
+        
+        .post-content-markdown table { border: 1px solid var(--border-color); width: 100%; border-collapse: collapse; }
+        .post-content-markdown td, .post-content-markdown th { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
+
+        .post-editor-surface table { border: 1px solid #ccc; width: 100%; border-collapse: collapse; }
+        .post-editor-surface td { border: 1px solid #ccc; padding: 5px; }
+
+        .ticker-text { font-variant-numeric: tabular-nums; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+    "recharts": "https://esm.sh/recharts@^3.7.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[var(--bg-primary)] overflow-x-hidden antialiased">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
