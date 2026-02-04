@@ -45,8 +45,22 @@ const App: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const savedUserId = localStorage.getItem('maksocial_current_user_id');
+    if (savedUserId) {
+      const user = db.getUsers().find(u => u.id === savedUserId);
+      if (user) {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        setuserRole(user.email?.endsWith('@admin.mak.ac.ug') ? 'admin' : 'student');
+        setView('home');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (isLoggedIn) {
-      setCurrentUser(db.getUser());
+      const user = db.getUser();
+      setCurrentUser(user);
       setUnreadMsgs(db.getChats().reduce((acc, c) => acc + c.unreadCount, 0));
       setUnreadNotifs(db.getNotifications().filter(n => !n.isRead).length);
     }
@@ -81,6 +95,7 @@ const App: React.FC = () => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setIsNotifOpen(false);
         setIsMsgOpen(false);
+        setIsSectorDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -102,6 +117,19 @@ const App: React.FC = () => {
   };
 
   const handleLogin = (email: string) => {
+    const users = db.getUsers();
+    const existingUser = users.find(u => u.email === email);
+    
+    if (existingUser) {
+      localStorage.setItem('maksocial_current_user_id', existingUser.id);
+      setCurrentUser(existingUser);
+    } else {
+      // Fallback for mock environment if no matching user found, create one or use mock
+      const mockId = 'u-ninfa';
+      localStorage.setItem('maksocial_current_user_id', mockId);
+      setCurrentUser(db.getUser(mockId));
+    }
+
     const isAdmin = email.toLowerCase().endsWith('@admin.mak.ac.ug');
     setIsLoggedIn(true);
     setuserRole(isAdmin ? 'admin' : 'student');
@@ -109,22 +137,52 @@ const App: React.FC = () => {
   };
 
   const handleRegister = (email: string, college: College, status: UserStatus) => {
-    setIsLoggedIn(true); setuserRole('student'); setView('home');
-    const newUser: User = { id: Date.now().toString(), name: email.split('@')[0], role: 'University Student', avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`, connections: 0, email, college, status, subscriptionTier: 'Free', joinedColleges: [college], postsCount: 0, followersCount: 0, followingCount: 0, totalLikesCount: 0, badges: [], appliedTo: [], verified: true };
+    const userId = Date.now().toString();
+    const newUser: User = { 
+      id: userId, 
+      name: email.split('@')[0], 
+      role: 'University Student', 
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`, 
+      connections: 0, 
+      email, 
+      college, 
+      status, 
+      subscriptionTier: 'Free', 
+      joinedColleges: [college], 
+      postsCount: 0, 
+      followersCount: 0, 
+      followingCount: 0, 
+      totalLikesCount: 0, 
+      badges: [], 
+      appliedTo: [], 
+      verified: true 
+    };
+    
     db.saveUsers([...db.getUsers(), newUser]);
-    localStorage.setItem('maksocial_current_user_id', newUser.id);
+    localStorage.setItem('maksocial_current_user_id', userId);
     setCurrentUser(newUser);
+    setIsLoggedIn(true); 
+    setuserRole('student'); 
+    setView('home');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('maksocial_current_user_id');
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    setView('landing');
   };
 
   const handleSetView = (newView: AppView) => {
-    setView(newView); setIsSidebarOpen(false);
+    setView(newView); 
+    setIsSidebarOpen(false);
     setIsNotifOpen(false);
     setIsMsgOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (isLoggedIn && userRole === 'admin') {
-    return <Admin onLogout={() => {setIsLoggedIn(false); setView('landing');}} />;
+    return <Admin onLogout={handleLogout} />;
   }
 
   const renderContent = () => {
@@ -136,7 +194,7 @@ const App: React.FC = () => {
       case 'thread': return <Feed threadId={activeThreadId || undefined} onOpenThread={(id) => setActiveThreadId(id)} onBack={() => setView('home')} onNavigateToProfile={(id) => {setSelectedUserId(id); setView('profile');}} triggerSafetyError={() => {}} />;
       case 'chats': return <ChatHub />;
       case 'email': return <EmailHub />;
-      case 'profile': return <Profile userId={selectedUserId || currentUser?.id} onNavigateBack={() => { setSelectedUserId(null); setView('home'); }} onNavigateToProfile={(id) => setSelectedUserId(id)} onMessageUser={() => setView('chats')} />;
+      case 'profile': return <Profile userId={selectedUserId || currentUser?.id} onNavigateBack={() => { setSelectedUserId(null); setView('home'); }} onNavigateToProfile={(id) => setSelectedUserId(id)} onMessageUser={() => setView('chats')} onUpdateCurrentUser={(u) => setCurrentUser(u)} />;
       case 'calendar': return <CalendarView isAdmin={userRole === 'admin'} />;
       case 'admin-calendar': return <AdminCalendar />;
       case 'resources': return <Resources />;
@@ -159,7 +217,7 @@ const App: React.FC = () => {
         activeView={view} 
         setView={handleSetView} 
         isAdmin={userRole === 'admin'} 
-        onLogout={() => {setIsLoggedIn(false); setView('landing');}} 
+        onLogout={handleLogout} 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
         onSearchToggle={() => setIsSearchOpen(!isSearchOpen)}
@@ -176,9 +234,9 @@ const App: React.FC = () => {
 
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <header ref={headerRef} className="sticky top-0 z-[80] bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border-color)] px-4 sm:px-6 py-4 flex items-center justify-between shadow-sm">
-          <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-visible">
             <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-full lg:hidden shrink-0"><Menu size={22} /></button>
-            <div className="relative overflow-hidden">
+            <div className="relative">
               <button onClick={() => setIsSectorDropdownOpen(!isSectorDropdownOpen)} className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl transition-all group max-w-[150px] sm:max-w-none">
                 <div className="shrink-0 text-[var(--brand-color)]">{activeSector === 'Global' ? <Globe size={16} /> : <LayoutGrid size={16} />}</div>
                 <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[var(--brand-color)] truncate">{activeSector} HUB</span>
@@ -225,11 +283,11 @@ const App: React.FC = () => {
               <button 
                 onClick={() => handleSetView('profile')} 
                 className="ml-1 shrink-0 active:scale-95 transition-transform flex items-center justify-center"
-                style={{ minWidth: '40px', minHeight: '40px' }}
+                style={{ width: '40px', height: '40px' }}
               >
                 <img 
                   src={currentUser.avatar} 
-                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 aspect-square object-cover flex-shrink-0 ${view === 'profile' ? 'border-[var(--brand-color)]' : 'border-[var(--border-color)]'} bg-white`} 
+                  className={`w-10 h-10 rounded-full border-2 aspect-square object-cover flex-shrink-0 ${view === 'profile' ? 'border-[var(--brand-color)]' : 'border-[var(--border-color)]'} bg-white`} 
                   alt="Profile" 
                 />
               </button>
