@@ -124,7 +124,7 @@ const MakSocial: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="absolute -bottom-8 -left-8 bg-secondary p-5 rounded-2xl shadow-card max-w-[280px]">
+                <div className="absolute -bottom-8 -left-8 bg-[#1A2533] p-5 rounded-2xl shadow-card max-w-[280px]">
                   <p className="text-white font-medium text-sm mb-3">
                     "Does anyone have the notes for yesterday's Psychology lecture?"
                   </p>
