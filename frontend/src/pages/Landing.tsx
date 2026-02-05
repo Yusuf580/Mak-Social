@@ -109,7 +109,7 @@ const MakSocial: React.FC = () => {
                 <img
                   alt="Students Collaborating"
                   className="rounded-3xl shadow-2xl object-cover h-[400px] w-full lg:h-[500px]"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0mE-NfFSEzQehWd15JeRNlchhnZe6_3aUVXhLj8K_a92z_cVwVj01WmH4KAWHXlKMs2zpWZ6A6oLPpf5sXLrAc6VEtVthIKH-iPoW9ZsThmtu6E6sUzTBKRXZ7A30HiYwxwNsK_a1W7jmpmgvwB6xHX33YPwHtbjxCzc2Y3Nbxw9fTkFaKZzqHURPRKGSXWQESSnvGAp3E34Zzu8th4b4R07BqVemnZQc9BcsMYuwuUfmY3cPV9jCk21lGvSJIofiJNB9q4HUmYhC"
+                  src="/hero.jpg"
                 />
                 
                 <div className="absolute -top-6 -right-4 bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-card max-w-[240px] border border-gray-100 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s' }}>
