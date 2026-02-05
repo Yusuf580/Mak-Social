@@ -8,15 +8,15 @@
 @layer base {
   :root {
     /* Colors (RGB for opacity support) */
-    --primary: 46 204 113;
-    --primary-dark: 39 174 96;
-    --secondary: 26 37 51;
+    --primary: #2ECC71;
+    --primary-dark: #27AE60;
+    --secondary:#1A2533;
 
-    --background-light: 255 255 255;
-    --background-dark: 17 24 39;
+    --background-light: #FFFFFF;
+    --background-dark: #111827;
 
-    --surface-light: 249 250 251;
-    --surface-dark: 31 41 55;
+    --surface-light:#F9FAFB;
+    --surface-dark: #1F2937;
 
     /* Radius */
     --radius: 12px;
