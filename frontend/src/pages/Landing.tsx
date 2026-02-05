@@ -79,7 +79,7 @@ const MakSocial: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <div className="max-w-2xl">
               <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-tight text-gray-900 dark:text-white mb-6">
-                Connect with the <br />
+                Join the <br />
                 <span className="text-underline-anim">Makerere</span> Community
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-lg">
