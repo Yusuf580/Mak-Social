@@ -30,7 +30,7 @@ const MakSocial: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+              <div className="w-10 h-10 bg-[#2ECC71] rounded-xl flex items-center justify-center text-white">
                 <School className="w-6 h-6" />
               </div>
               <span className="font-display font-bold text-2xl tracking-tight text-gray-900 dark:text-white">
@@ -72,7 +72,7 @@ const MakSocial: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-20 lg:pt-24 lg:pb-32 overflow-hidden">
+      <section className="relative pt-12 pb-20 lg:pt-[20px] lg:pb-32 overflow-hidden">
         <div className="bg-primary/10 w-96 h-96 rounded-full hero-blob -top-20 -left-20 dark:bg-primary/5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -86,11 +86,11 @@ const MakSocial: React.FC = () => {
                 The ultimate hub for Makerere University students and staff. Access notes, network with peers, and stay updated with campus life instantly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg shadow-glow transition-all transform hover:-translate-y-1 text-center" href="#">
+                <a className="bg-[#2ECC71] hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg shadow-glow transition-all transform hover:-translate-y-1 text-center" href="#">
                   Join Now
                 </a>
                 <a className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-lg text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all" href="#">
-                  <PlayCircle className="w-6 h-6 text-primary" />
+                  <PlayCircle className="w-6 h-6 text-[#2ECC71]" />
                   See how it works
                 </a>
               </div>
@@ -114,7 +114,7 @@ const MakSocial: React.FC = () => {
                 
                 <div className="absolute -top-6 -right-4 bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-card max-w-[240px] border border-gray-100 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s' }}>
                   <div className="flex items-start gap-3">
-                    <div className="bg-primary/10 p-2 rounded-lg text-primary">
+                    <div className="bg-[#2ECC71]/10 p-2 rounded-lg text-[#2ECC71]">
                       <School className="w-4 h-4" />
                     </div>
                     <div>
