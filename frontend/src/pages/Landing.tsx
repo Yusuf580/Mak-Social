@@ -239,19 +239,19 @@ const MakSocial: React.FC = () => {
                 </p>
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center gap-3 text-white">
-                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <CheckCircle className="w-5 h-5 text-[#2ECC71]" />
                     Direct updates from Dean's offices
                   </li>
                   <li className="flex items-center gap-3 text-white">
-                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <CheckCircle className="w-5 h-5 text-[#2ECC71]" />
                     Verified Guild announcements
                   </li>
                   <li className="flex items-center gap-3 text-white">
-                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <CheckCircle className="w-5 h-5 text-[#2ECC71]" />
                     Authenticated course coordinators
                   </li>
                 </ul>
-                <button className="bg-white text-secondary px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors">
+                <button className="bg-white text-[#1A2533] px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors">
                   Apply for Verification
                 </button>
               </div>
