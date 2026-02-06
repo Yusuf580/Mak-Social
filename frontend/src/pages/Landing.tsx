@@ -472,17 +472,17 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
   return (
     <div
-      className={`bg-[#FFFFFF] dark:[#111827] p-8 rounded-2xl shadow-sm border ${featured
+      className={`bg-[#FFFFFF] dark:bg-[#111827] p-8 rounded-2xl shadow-sm border ${featured
           ? 'border-[#2ECC71]/20 shadow-card relative'
           : 'border-gray-100 dark:border-gray-700'
         }`}
     >
       {featured && (
-        <div className="absolute -top-4 -right-4 bg-primary text-white text-xs px-2 py-1 rounded">
+        <div className="absolute -top-[10px] -right-4 bg-[#2ECC71] text-white text-xs px-2 py-1 rounded-[20px]">
           Top Review
         </div>
       )}
-      <div className="flex text-primary mb-4">{renderStars()}</div>
+      <div className="flex text-[#2ECC71] mb-4">{renderStars()}</div>
       <p className="text-gray-700 dark:text-gray-300 italic mb-6">"{quote}"</p>
       <div className="flex items-center gap-4">
         <img alt={name} className="w-12 h-12 rounded-full object-cover" src={avatar} />
