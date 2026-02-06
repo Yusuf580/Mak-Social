@@ -24,9 +24,9 @@ import {
 
 const MakSocial: React.FC = () => {
   return (
-    <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-body antialiased transition-colors duration-300">
+    <div className="bg-[#FFFFFF] dark:bg-[#111827] text-gray-900 dark:text-gray-100 font-body antialiased transition-colors duration-300">
       {/* Navigation */}
-      <nav className="sticky top-0 w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+      <nav className="sticky top-0 w-full z-50 bg-[#FFFFFF]/90 dark:bg-[#111827]/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
@@ -39,25 +39,25 @@ const MakSocial: React.FC = () => {
             </div>
 
             <div className="hidden md:flex space-x-8 items-center">
-              <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">
+              <a className="text-gray-600 dark:text-gray-300 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] font-medium transition-colors" href="#">
                 Home
               </a>
-              <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#features">
+              <a className="text-gray-600 dark:text-gray-300 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] font-medium transition-colors" href="#features">
                 Features
               </a>
-              <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#vault">
+              <a className="text-gray-600 dark:text-gray-300 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] font-medium transition-colors" href="#vault">
                 Academic Vault
               </a>
-              <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#colleges">
+              <a className="text-gray-600 dark:text-gray-300 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] font-medium transition-colors" href="#colleges">
                 Colleges
               </a>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <a className="text-gray-700 dark:text-gray-200 font-bold hover:text-primary transition-colors" href="#">
+              <a className="text-gray-700 dark:text-gray-200 font-bold hover:text-[#2ECC71] transition-colors" href="#">
                 Log In
               </a>
-              <a className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 px-6 py-2.5 rounded-xl font-bold hover:border-primary dark:hover:border-primary transition-all shadow-sm" href="#">
+              <a className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 px-6 py-2.5 rounded-xl font-bold hover:border-[#2ECC71] dark:hover:border-[#2ECC71] transition-all shadow-sm" href="#">
                 Sign Up Now
               </a>
             </div>
@@ -355,12 +355,12 @@ const MakSocial: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 pt-16 pb-8">
+      <footer className="bg-white dark:bg-[#111827] border-t border-gray-200 dark:border-gray-800 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                <div className="w-8 h-8 bg-[#2ECC71] rounded-lg flex items-center justify-center text-white">
                   <School className="w-5 h-5" />
                 </div>
                 <span className="font-display font-bold text-xl text-gray-900 dark:text-white">
