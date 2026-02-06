@@ -219,15 +219,15 @@ const MakSocial: React.FC = () => {
 
       {/* Verified Section */}
       <section className="py-20 bg-surface-light dark:bg-surface-dark relative overflow-hidden">
-        <div className="absolute left-0 bottom-0 w-64 h-64 bg-primary/5 rounded-tr-full" />
+        <div className="absolute left-0 bottom-0 w-64 h-64 bg-[#2ECC71]/5 rounded-tr-full" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="bg-secondary rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
+          <div className="bg-[#1A2533] rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
             <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-gray-800 to-transparent opacity-50" />
             
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-bold mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2ECC71]/20 text-[#2ECC71] text-sm font-bold mb-6">
                   <ShieldCheck className="w-4 h-4" />
                   Verified & Trusted
                 </div>
