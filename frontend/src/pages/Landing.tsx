@@ -167,7 +167,7 @@ const MakSocial: React.FC = () => {
       <section className="py-20 bg-background-light dark:bg-background-dark" id="features">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-bold tracking-wider uppercase text-sm">Why MakSocial?</span>
+            <span className="text-[#2ECC71] font-bold tracking-wider uppercase text-sm">Why MakSocial?</span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-gray-900 dark:text-white mt-2 mb-4">
               Empowering the Student Journey
             </h2>
@@ -177,7 +177,7 @@ const MakSocial: React.FC = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group">
+            <div className="bg-[#F9FAFB] dark:[#1F2937] p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group">
               <div className="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
                 <MessageSquare className="w-8 h-8" />
               </div>
@@ -189,7 +189,7 @@ const MakSocial: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group relative overflow-hidden">
+            <div className="bg-[#F9FAFB] dark:[#1F2937] p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group relative overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full" />
               <div className="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
                 <BookOpen className="w-8 h-8" />
