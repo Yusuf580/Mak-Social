@@ -337,7 +337,7 @@ const MakSocial: React.FC = () => {
                 Find your niche within the university.
               </p>
             </div>
-            <a className="text-primary font-bold hover:underline mt-4 md:mt-0 flex items-center gap-1" href="#">
+            <a className="text-[#2ECC71] font-bold hover:underline mt-4 md:mt-0 flex items-center gap-1" href="#">
               View all colleges
               <ChevronRight className="w-4 h-4" />
             </a>
@@ -478,7 +478,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }`}
     >
       {featured && (
-        <div className="absolute -top-[10px] -right-4 bg-[#2ECC71] text-white text-xs px-2 py-1 rounded-[20px]">
+        <div className="absolute -top-2.5 -right-4 bg-[#2ECC71] text-white text-xs px-2 py-1 rounded-[20px]">
           Top Review
         </div>
       )}
@@ -514,7 +514,7 @@ const CollegeCard: React.FC<CollegeCardProps> = ({ name, icon: Icon, color }) =>
 
   return (
     <a
-      className="group p-4 bg-white dark:bg-background-dark rounded-xl text-center border border-gray-100 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-all"
+      className="group p-4 bg-white dark:bg-background-[#111827] rounded-xl text-center border border-gray-100 dark:border-gray-700 hover:border-[#2ECC71] dark:hover:border-[#2ECC71] transition-all"
       href="#"
     >
       <div
