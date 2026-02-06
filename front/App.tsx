@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { AppView, User, College, UserStatus } from './types';
+import { AppView, User, College, UserStatus, AppSettings } from './types';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -15,10 +15,11 @@ import Resources from './components/Resources';
 import Opportunities from './components/Opportunities';
 import NotificationsView from './components/Notifications';
 import Gallery from './components/Gallery';
-import EmailHub from './components/EmailHub';
+import Settings from './components/Settings';
 import MessageDropdown from './components/MessageDropdown';
 import NotificationDropdown from './components/NotificationDropdown';
 import SearchDrawer from './components/SearchDrawer';
+import RightSidebar from './components/RightSidebar';
 import { db } from './db';
 import { Menu, MessageCircle, Bell, Globe, ChevronDown, LayoutGrid } from 'lucide-react';
 
@@ -34,7 +35,7 @@ const App: React.FC = () => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [activeThreadId, setActiveThreadId] = useState<string | null>(null);
 
-  // Manifest Dropdown States
+  const [isDark, setIsDark] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isMsgOpen, setIsMsgOpen] = useState(false);
   const [unreadMsgs, setUnreadMsgs] = useState(0);
@@ -64,16 +65,16 @@ const App: React.FC = () => {
     }
   }, [isLoggedIn, view]);
 
-  // Apply default styles for light theme and #10918a
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty('--brand-color', '#10918a');
+    root.style.setProperty('--radius-main', '2px');
     root.style.setProperty('--bg-primary', '#ffffff');
     root.style.setProperty('--bg-secondary', '#f8fafc');
     root.style.setProperty('--text-primary', '#0f172a');
     root.style.setProperty('--border-color', '#e2e8f0');
     document.documentElement.classList.remove('dark');
-  }, []);
+  }, [view]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -90,7 +91,6 @@ const App: React.FC = () => {
   const handleLogin = (email: string) => {
     const users = db.getUsers();
     const existingUser = users.find(u => u.email === email);
-    
     if (existingUser) {
       localStorage.setItem('maksocial_current_user_id', existingUser.id);
       setCurrentUser(existingUser);
@@ -99,7 +99,6 @@ const App: React.FC = () => {
       localStorage.setItem('maksocial_current_user_id', mockId);
       setCurrentUser(db.getUser(mockId));
     }
-
     const isAdmin = email.toLowerCase().endsWith('@admin.mak.ac.ug');
     setIsLoggedIn(true);
     setuserRole(isAdmin ? 'admin' : 'student');
@@ -127,7 +126,6 @@ const App: React.FC = () => {
       appliedTo: [], 
       verified: true 
     };
-    
     db.saveUsers([...db.getUsers(), newUser]);
     localStorage.setItem('maksocial_current_user_id', userId);
     setCurrentUser(newUser);
@@ -163,7 +161,6 @@ const App: React.FC = () => {
       case 'home': return <Feed collegeFilter={activeSector} onOpenThread={(id) => {setActiveThreadId(id); setView('thread');}} onNavigateToProfile={(id) => {setSelectedUserId(id); setView('profile');}} triggerSafetyError={() => {}} />;
       case 'thread': return <Feed threadId={activeThreadId || undefined} onOpenThread={(id) => setActiveThreadId(id)} onBack={() => setView('home')} onNavigateToProfile={(id) => {setSelectedUserId(id); setView('profile');}} triggerSafetyError={() => {}} />;
       case 'chats': return <ChatHub />;
-      case 'email': return <EmailHub />;
       case 'profile': return <Profile userId={selectedUserId || currentUser?.id} onNavigateBack={() => { setSelectedUserId(null); setView('home'); }} onNavigateToProfile={(id) => setSelectedUserId(id)} onMessageUser={() => setView('chats')} onUpdateCurrentUser={(u) => setCurrentUser(u)} />;
       case 'calendar': return <CalendarView isAdmin={userRole === 'admin'} />;
       case 'admin-calendar': return <AdminCalendar />;
@@ -171,6 +168,7 @@ const App: React.FC = () => {
       case 'opportunities': return <Opportunities />;
       case 'notifications': return <NotificationsView />;
       case 'gallery': return <Gallery onSelectPost={(id) => {setActiveThreadId(id); setView('thread');}} />;
+      case 'settings': return <Settings />;
       default: return <Feed collegeFilter={activeSector} onOpenThread={() => {}} onNavigateToProfile={() => {}} triggerSafetyError={() => {}} />;
     }
   };
@@ -202,7 +200,7 @@ const App: React.FC = () => {
       />
 
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header ref={headerRef} className="sticky top-0 z-[80] bg-white/80 backdrop-blur-md border-b border-[var(--border-color)] px-4 sm:px-6 py-4 flex items-center justify-between shadow-sm">
+        <header ref={headerRef} className="sticky top-0 z-[80] bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border-color)] px-4 sm:px-6 py-4 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-2 sm:gap-3 overflow-visible">
             <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-full lg:hidden shrink-0"><Menu size={22} /></button>
             <div className="relative">
@@ -212,9 +210,9 @@ const App: React.FC = () => {
                 <ChevronDown size={12} className={`text-slate-500 transition-transform shrink-0 ${isSectorDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {isSectorDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-[var(--border-color)] rounded-xl shadow-2xl z-[500] p-3 animate-in slide-in-from-top-2">
-                  <button onClick={() => { setActiveSector('Global'); setIsSectorDropdownOpen(false); setView('home'); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 ${activeSector === 'Global' ? 'bg-[var(--brand-color)] text-white' : 'hover:bg-slate-50 text-slate-400'}`}><Globe size={16} /> <span className="text-[10px] font-black uppercase">Global Pulse</span></button>
-                  <div className="grid grid-cols-2 gap-1.5">{['COCIS', 'CEDAT', 'CHUSS', 'CONAS', 'CHS', 'CAES', 'COBAMS', 'CEES', 'LAW'].map(c => (<button key={c} onClick={() => { setActiveSector(c as College); setIsSectorDropdownOpen(false); setView('home'); }} className={`flex items-center justify-center py-2.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${activeSector === c ? 'bg-[var(--brand-color)] text-white' : 'hover:bg-slate-50 text-slate-400'}`}>{c}</button>))}</div>
+                <div className="absolute top-full left-0 mt-2 w-64 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl shadow-2xl z-[500] p-3 animate-in slide-in-from-top-2">
+                  <button onClick={() => { setActiveSector('Global'); setIsSectorDropdownOpen(false); setView('home'); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 ${activeSector === 'Global' ? 'bg-[var(--brand-color)] text-white' : 'hover:bg-[var(--bg-secondary)] text-slate-400'}`}><Globe size={16} /> <span className="text-[10px] font-black uppercase">Global Pulse</span></button>
+                  <div className="grid grid-cols-2 gap-1.5">{['COCIS', 'CEDAT', 'CHUSS', 'CONAS', 'CHS', 'CAES', 'COBAMS', 'CEES', 'LAW'].map(c => (<button key={c} onClick={() => { setActiveSector(c as College); setIsSectorDropdownOpen(false); setView('home'); }} className={`flex items-center justify-center py-2.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${activeSector === c ? 'bg-[var(--brand-color)] text-white' : 'hover:bg-[var(--bg-secondary)] text-slate-400'}`}>{c}</button>))}</div>
                 </div>
               )}
             </div>
@@ -261,7 +259,10 @@ const App: React.FC = () => {
             )}
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto no-scrollbar">{renderContent()}</main>
+        <div className="flex-1 flex overflow-hidden">
+          <main className="flex-1 overflow-y-auto no-scrollbar">{renderContent()}</main>
+          {(view === 'home' || view === 'thread') && <RightSidebar />}
+        </div>
       </div>
     </div>
   );
