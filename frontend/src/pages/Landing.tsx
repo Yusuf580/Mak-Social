@@ -74,7 +74,7 @@ const MakSocial: React.FC = () => {
       {/* Hero Section */}
       <section className="relative pt-12 pb-20 lg:pt-[20px] lg:pb-32 overflow-hidden">
         <div className="bg-primary/10 w-96 h-96 rounded-full hero-blob -top-20 -left-20 dark:bg-primary/5" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <div className="max-w-2xl">
@@ -98,7 +98,7 @@ const MakSocial: React.FC = () => {
 
             <div className="relative lg:ml-auto w-full max-w-lg lg:max-w-full">
               <div className="absolute right-0 top-10 w-3/4 h-3/4 bg-green-100 dark:bg-green-900/20 rounded-full blur-3xl -z-10" />
-              
+
               <div className="absolute -bottom-6 -left-6 w-24 h-24 text-gray-200 dark:text-gray-700">
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                   <path d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.7C91.4,-34.3,98.1,-19.6,95.8,-5.8C93.5,8,82.3,20.9,71.4,32.2C60.5,43.5,49.9,53.2,38.1,60.8C26.3,68.4,13.2,73.9,0.5,73.1C-12.2,72.2,-24.4,65,-35.1,56.7C-45.8,48.4,-55.1,39,-62.7,28.2C-70.3,17.4,-76.2,5.2,-74.6,-6.2C-73,-17.6,-63.9,-28.2,-54.1,-37.2C-44.3,-46.2,-33.8,-53.6,-22.7,-62.3C-11.6,-71,-0,-81,13.8,-83.4C27.6,-85.8,44.7,-76.4,44.7,-76.4Z" fill="currentColor" transform="translate(100 100)" />
@@ -111,7 +111,7 @@ const MakSocial: React.FC = () => {
                   className="rounded-3xl shadow-2xl object-cover h-[400px] w-full lg:h-[500px]"
                   src="/hero.jpg"
                 />
-                
+
                 <div className="absolute -top-6 -right-4 bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-card max-w-[240px] border border-gray-100 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s' }}>
                   <div className="flex items-start gap-3">
                     <div className="bg-[#2ECC71]/10 p-2 rounded-lg text-[#2ECC71]">
@@ -220,11 +220,11 @@ const MakSocial: React.FC = () => {
       {/* Verified Section */}
       <section className="py-20 bg-surface-light dark:bg-surface-dark relative overflow-hidden">
         <div className="absolute left-0 bottom-0 w-64 h-64 bg-[#2ECC71]/5 rounded-tr-full" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="bg-[#1A2533] rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
             <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-gray-800 to-transparent opacity-50" />
-            
+
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2ECC71]/20 text-[#2ECC71] text-sm font-bold mb-6">
@@ -284,7 +284,7 @@ const MakSocial: React.FC = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-background-light dark:bg-background-dark">
+      <section className="py-20 bg-background-[#FFFFFF] dark:bg-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-gray-900 dark:text-white">
@@ -323,6 +323,7 @@ const MakSocial: React.FC = () => {
           </div>
         </div>
       </section>
+      
 
       {/* Colleges Section */}
       <section className="py-20 bg-surface-light dark:bg-surface-dark" id="colleges">
@@ -461,21 +462,20 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<Star key={i} className="w-4 h-4 fill-current" />);
+      stars.push(<Star key={i} className="w-4 h-4 fill-current text-[#2ECC71]" />);
     }
     if (hasHalfStar) {
-      stars.push(<StarHalf key="half" className="w-4 h-4 fill-current" />);
+      stars.push(<StarHalf key="half" className="w-4 h-4 fill-current text-[#2ECC71]" />);
     }
     return stars;
   };
 
   return (
     <div
-      className={`bg-surface-light dark:bg-surface-dark p-8 rounded-2xl shadow-sm border ${
-        featured
-          ? 'border-primary/20 shadow-card relative'
+      className={`bg-[#FFFFFF] dark:[#111827] p-8 rounded-2xl shadow-sm border ${featured
+          ? 'border-[#2ECC71]/20 shadow-card relative'
           : 'border-gray-100 dark:border-gray-700'
-      }`}
+        }`}
     >
       {featured && (
         <div className="absolute -top-4 -right-4 bg-primary text-white text-xs px-2 py-1 rounded">
