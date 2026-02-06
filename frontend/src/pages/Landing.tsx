@@ -260,21 +260,21 @@ const MakSocial: React.FC = () => {
                 <img
                   alt="Lecturer using tablet"
                   className="rounded-2xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-gray-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHEd5Tuff_xnG0ZigOb4o7s0B9DFbrVNoPZxFLXlx6pvjc72ck7pmPRM0G8A80SCA4X2FEq1xVtTFJQ27APXpn925lmEkf7Lz6pdle-jKcaMqmSXheg6iuyQcpcIbVO30asUJzVSwfa_VW0ueeSnfujROAg_euh8Sh03OglCgDZUhQcdiHB24CEFh4PqW7v51G5W8rRWSNwDTP4dO0PRk4wRazaCSKw5Gn2_8Pkv6_-0y7_fIFNTPJvF7xcwamBHDwt7aR9AwRYulB"
+                  src="/lec.jpg"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-200 dark:border-gray-600 flex items-center gap-3">
                   <div className="w-10 h-10 bg-gray-200 rounded-full overflow-hidden">
                     <img
                       alt="Avatar"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj52ijYt50oKpZzrrDUPTLQD_mt1St1lWHZ_Pwo9PKjVwKrMiEsoW2ZVNgsKezd_MmLfOqP9-IpuS-Fz-9xnnewrgZ7Z75NQBSGl7TqJc-qxLOjbiOvUoTw3pN6jRnwVv2PC_WlCncGsbvkRmnwoXi7hJ63CEtW3SrCzpD3A568e1vnUHZ_nlsYc_N8_UULU-vdhJ3RFsmkxuI2971xHVDZLmSzGDGPqd5Gg3mo_URWu3c3bYpxNP6LSlMH9SKuNIKFgSGgA9z6oRQ"
+                      src="/vc.jpeg"
                     />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1">
-                      Dr. James Okello
+                      Prof. Barnabas Nawangwe
                       <ShieldCheck className="w-4 h-4 text-blue-500" />
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Dean, School of Computing</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Vice Chancellor of Makerere University</p>
                   </div>
                 </div>
               </div>
