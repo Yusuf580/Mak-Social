@@ -202,8 +202,8 @@ const MakSocial: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group">
-              <div className="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+            <div className="bg-[#F9FAFB] dark:[#1F2937] p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-card transition-shadow group">
+              <div className="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#2ECC71] group-hover:text-white transition-colors text-[#2ECC71]">
                 <Network className="w-8 h-8" />
               </div>
               <h3 className="font-display font-bold text-xl text-gray-900 dark:text-white mb-3">
