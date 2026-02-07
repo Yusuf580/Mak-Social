@@ -64,7 +64,7 @@ const Register: React.FC = () => {
               </span>
             </div>
 
-            <h2 className="text-2xl font-bold">Create Account</h2>
+            <h2 className="text-2xl font-bold">Create Your Account</h2>
             <p className="text-sm text-slate-500 dark:text-slate-400">
               Sign up to get started with your academic journey.
             </p>
@@ -144,17 +144,17 @@ const Register: React.FC = () => {
             <label className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
               <input type="checkbox" className="mt-0.5" />
               I agree to the{" "}
-              <a className="text-primary font-medium hover:underline">
-                Terms
+              <a className="text-[#2ECC71] font-medium hover:underline">
+                Terms of Service
               </a>{" "}
               and{" "}
-              <a className="text-primary font-medium hover:underline">
+              <a className="text-[#2ECC71] font-medium hover:underline">
                 Privacy Policy
               </a>
             </label>
 
             {/* Submit */}
-            <button className="w-full h-10 bg-primary hover:bg-green-600 text-white text-sm font-semibold rounded-md flex items-center justify-center gap-2">
+            <button className="w-full h-10 bg-[#2ECC71] hover:bg-green-600 text-white text-sm font-semibold rounded-md flex items-center justify-center gap-2">
               Sign Up
               <ArrowRight className="w-4 h-4" />
             </button>
@@ -163,7 +163,7 @@ const Register: React.FC = () => {
           {/* Footer */}
           <p className="text-center text-xs text-slate-500">
             Already have an account?{" "}
-            <a className="text-primary font-semibold hover:underline">
+            <a className="text-[#2ECC71] font-semibold hover:underline">
               Sign In
             </a>
           </p>
