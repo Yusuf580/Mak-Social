@@ -17,10 +17,10 @@ const Register: React.FC = () => {
         className="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-12 overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage:
-            'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3wlb5_7cbfcbFOT1F6_R9y8zIZqV6sRsJMapnNC_HurqHy_-ceBjFGS9RNjv9u2G51RvPdPqHICWBTG1iaIs6dE53d0_UoPzyst7rDMObS0qeyW0dpOmx-WnL7szML_cIqrwYd_AgflHa3whPLQv1DCRMvpk6_IcON8C5g7VHkokkeoEWspTayG8mEj4_ydHnoyRbGQvO6pqXqtQ5xG5S-bzeJQ-wJOfhYxRE-nyGYqo2C2Mb5YQg6-zZZdo60A5wpWJMxjTB9hW8")',
+            'url("/mak.jpg")',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
 
         <div className="relative z-10 flex flex-col gap-4 max-w-lg">
           <h1 className="text-white text-5xl font-black leading-tight tracking-tight">
