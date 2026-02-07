@@ -56,7 +56,7 @@ const Register: React.FC = () => {
           {/* Header */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-3 mb-1">
-              <div className="w-9 h-9 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+              <div className="w-9 h-9 bg-[#2ECC71]/20 rounded-lg flex items-center justify-center text-[#2ECC71]">
                 <LayoutGrid className="w-5 h-5" />
               </div>
               <span className="text-lg font-bold tracking-tight">
