@@ -34,14 +34,14 @@ const Register: React.FC = () => {
 
           <div className="flex gap-3 mt-4">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-              <GraduationCap className="text-primary w-4 h-4" />
+              <GraduationCap className="text-[#2ECC71] w-4 h-4" />
               <span className="text-sm font-semibold text-white">
                 Academic Resources
               </span>
             </div>
 
             <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-              <Users className="text-primary w-4 h-4" />
+              <Users className="text-[#2ECC71] w-4 h-4" />
               <span className="text-sm font-semibold text-white">
                 Student Network
               </span>
