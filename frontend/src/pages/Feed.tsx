@@ -25,6 +25,7 @@ import {
   Plus,
   Menu,
   Users,
+  GraduationCap,
 } from 'lucide-react';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
@@ -181,12 +182,12 @@ const Feed: React.FC = () => {
             {/* Logo */}
             <div className="p-8 mb-2">
               <div className="flex items-center gap-3">
-                <Users className="text-emerald-600 w-10 h-10" />
+                <GraduationCap className="text-[#2ECC71] w-10 h-10" />
                 <div className="flex flex-col">
                   <h1 className="font-bold text-2xl leading-none text-gray-900 dark:text-white tracking-tight">
                     MAK SOCIAL
                   </h1>
-                  <span className="text-[10px] font-bold text-emerald-700 tracking-[0.2em] uppercase mt-1">
+                  <span className="text-[10px] font-bold text-[#2ECC71] tracking-[0.2em] uppercase mt-1">
                     Connect & Learn
                   </span>
                 </div>
@@ -197,55 +198,55 @@ const Feed: React.FC = () => {
             <nav className="px-6 flex-1 flex flex-col gap-2">
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 bg-emerald-600 text-white rounded-xl shadow-md shadow-emerald-600/20 transform transition-all hover:scale-[1.02]"
+                className="flex items-center gap-4 px-4 py-4 bg-[#2ECC71] text-white rounded-xl shadow-md shadow-[#2ECC71]/20 transform transition-all hover:scale-[1.02]"
               >
                 <Home className="w-5 h-5" />
-                <span className="text-base font-semibold">HOME FEED</span>
+                <span className="text-[14px] font-bold">HOME FEED</span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <Grid3x3 className="w-5 h-5" />
-                <span className="text-base font-medium">PHOTOS</span>
+                <span className="text-[14px] font-medium">PHOTOS</span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <BookOpen className="w-5 h-5" />
-                <span className="text-base font-medium">STUDY VAULT</span>
+                <span className="text-[14px] font-medium">STUDY VAULT</span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <Calendar className="w-5 h-5" />
-                <span className="text-base font-medium">CALENDAR</span>
+                <span className="text-[14px] font-medium">CALENDAR</span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <MessageCircle className="w-5 h-5" />
-                <span className="text-base font-medium">MESSAGES</span>
+                <span className="text-[14px] font-medium">MESSAGES</span>
                 <span className="ml-auto bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                   3
                 </span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <HelpCircle className="w-5 h-5" />
-                <span className="text-base font-medium">LOST & FOUND</span>
+                <span className="text-[14px] font-medium">LOST & FOUND</span>
               </a>
               <a
                 href="#"
-                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 hover:text-emerald-600 dark:hover:text-emerald-600 rounded-xl transition-all"
+                className="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-[#2ECC71]/10 dark:hover:bg-[#2ECC71]/10 hover:text-[#2ECC71] dark:hover:text-[#2ECC71] rounded-xl transition-all"
               >
                 <Briefcase className="w-5 h-5" />
-                <span className="text-base font-medium">OPPORTUNITIES</span>
+                <span className="text-[14px] font-medium">OPPORTUNITIES</span>
               </a>
             </nav>
 
@@ -360,7 +361,7 @@ const Feed: React.FC = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-bold text-gray-900 dark:text-white text-base">
+                          <h3 className="font-bold text-gray-900 dark:text-white text-[14px]">
                             {post.author.name}
                           </h3>
                           {post.author.verified && (
@@ -457,7 +458,7 @@ const Feed: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-bold text-gray-900 dark:text-white text-base">
+                          <h3 className="font-bold text-gray-900 dark:text-white text-[14px]">
                             Prof. Barnabas Nawangwe
                           </h3>
                           <CheckBadgeIcon className="w-5 h-5 text-emerald-600" title="Verified" />
