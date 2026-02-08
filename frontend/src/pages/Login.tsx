@@ -15,22 +15,22 @@ const SignIn = () => {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <div className="h-screen w-full flex bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 overflow-hidden">
+      <div className="h-screen w-full flex bg-[#FFFFFF] dark:bg-[#111827] text-gray-900 dark:text-gray-100 overflow-hidden">
 
         {/* LEFT IMAGE SECTION */}
         <div className="hidden lg:flex lg:w-1/2 relative bg-black">
           <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMuqXryFAha3Qvj-gxsNS7rUAEP6ZePzEar5fM1S79iuKhXSp3cq68iyN5dc3Kj66ZGqIPAkLQ0o4NGLC3E_L8uUZiAPQ-JP4vYs9O9gfo8aWfYSG0JRbuH8YXyEfuGCCYzbtnyguShQ3qKZMDlTv5jWYSu7Sf40bNf2KlJOy9OtNXpA0p-pbcJer-Pl9P8wjPCO9nEJGiYW8lf1_wLWi7hIRFYtWE9rMDw9df6Xp-QTGQqMV3DCEDY__KmsoNcNjirWLKJZG_vvb9"
+            src="/cocis.jpg"
             alt="Makerere University"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
-          <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-[#2ECC71]/20 mix-blend-overlay" />
 
           <div className="relative z-10 flex flex-col justify-between w-full p-12 text-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <GraduationCap className="text-primary w-10 h-10" />
+                <GraduationCap className="text-[#2ECC71] w-10 h-10" />
                 <span className="text-2xl font-bold">MakSocial</span>
               </div>
 
@@ -48,8 +48,8 @@ const SignIn = () => {
                 Connect with Verified Peers.
               </p>
               <h1 className="text-6xl font-bold mb-6 leading-tight">
-                Welcome Home,<br />
-                <span className="text-primary">Maker.</span>
+                Welcome <br />
+                <span className="">Home.</span>
               </h1>
               <p className="text-gray-300 text-lg max-w-md">
                 The central hub for communication, academic resources,
