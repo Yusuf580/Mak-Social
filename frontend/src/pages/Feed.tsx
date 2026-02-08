@@ -351,17 +351,17 @@ const Feed: React.FC = () => {
                   </div>
                   <div className="flex justify-between items-center px-2">
                     <div className="flex gap-4 text-gray-500">
-                      <button className="flex items-center gap-2 hover:text-emerald-600 text-xs font-medium transition-colors">
-                        <Image className="w-4 h-4 text-emerald-600" /> Photo
+                      <button className="flex items-center gap-2 hover:text-[#2ECC71] text-xs font-medium transition-colors">
+                        <Image className="w-4 h-4 text-[#2ECC71]" /> Photo
                       </button>
-                      <button className="flex items-center gap-2 hover:text-emerald-600 text-xs font-medium transition-colors">
-                        <Video className="w-4 h-4 text-blue-500" /> Video
+                      <button className="flex items-center gap-2 hover:text-[#2ECC71] text-xs font-medium transition-colors">
+                        <Video className="w-4 h-4 text-[#3B82F6]" /> Video
                       </button>
-                      <button className="flex items-center gap-2 hover:text-emerald-600 text-xs font-medium transition-colors">
+                      <button className="flex items-center gap-2 hover:text-[#2ECC71] text-xs font-medium transition-colors">
                         <CalendarPlus className="w-4 h-4 text-orange-500" /> Event
                       </button>
                     </div>
-                    <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-md shadow-emerald-600/30 transition-all transform hover:scale-105">
+                    <button className="bg-[#2ECC71] hover:bg-[#2ECC71] text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-md shadow-emerald-600/30 transition-all transform hover:scale-105">
                       Post
                     </button>
                   </div>
@@ -388,10 +388,10 @@ const Feed: React.FC = () => {
                             {post.author.name}
                           </h3>
                           {post.author.verified && (
-                            <CheckBadgeIcon className="w-5 h-5 text-blue-500" title="Verified" />
+                            <CheckBadgeIcon className="w-5 h-5 text-[#3B82F6]" title="Verified" />
                           )}
                           {post.author.badge && (
-                            <span className="bg-emerald-600/10 text-emerald-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wide border border-emerald-600/20">
+                            <span className="bg-[#2ECC71]/10 text-[#2ECC71] text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wide border border-[#2ECC71]/20">
                               {post.author.badge}
                             </span>
                           )}
@@ -430,7 +430,7 @@ const Feed: React.FC = () => {
                         {post.hashtags.map((tag, index) => (
                           <span
                             key={index}
-                            className="text-emerald-700 hover:text-emerald-600 cursor-pointer text-xs font-semibold"
+                            className="text-[#2ECC71] hover:text-[#2ECC71] cursor-pointer text-xs font-semibold"
                           >
                             {tag}
                           </span>
@@ -441,20 +441,20 @@ const Feed: React.FC = () => {
                     {/* Post Actions */}
                     <div className="px-5 py-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
                       <div className="flex items-center gap-6">
-                        <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors group">
+                        <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-[#EF4444] transition-colors group">
                           <Heart className="w-5 h-5 group-hover:fill-current" />
                           {post.stats.likes > 0 && (
                             <span className="text-xs font-semibold">{post.stats.likes}</span>
                           )}
                         </button>
-                        <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors">
+                        <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-[#3B82F6] transition-colors">
                           <MessageCircle className="w-5 h-5" />
                           {post.stats.comments > 0 && (
                             <span className="text-xs font-semibold">{post.stats.comments}</span>
                           )}
                         </button>
                         {post.image && (
-                          <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-emerald-600 transition-colors">
+                          <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-[#2ECC71] transition-colors">
                             <CalendarPlus className="w-5 h-5" />
                             <span className="text-xs font-semibold">Save Event</span>
                           </button>
@@ -484,11 +484,11 @@ const Feed: React.FC = () => {
                           <h3 className="font-bold text-gray-900 dark:text-white text-[14px]">
                             Prof. Barnabas Nawangwe
                           </h3>
-                          <CheckBadgeIcon className="w-5 h-5 text-emerald-600" title="Verified" />
+                          <CheckBadgeIcon className="w-5 h-5 text-[#2ECC71]" title="Verified" />
                         </div>
                         <div className="flex items-center gap-2 text-gray-400">
                           <span className="text-xs">15m ago</span>
-                          <button className="hover:text-emerald-600 transition-colors">
+                          <button className="hover:text-[#2ECC71] transition-colors">
                             <Bookmark className="w-5 h-5" />
                           </button>
                         </div>

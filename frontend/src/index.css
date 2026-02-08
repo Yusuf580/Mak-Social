@@ -10,12 +10,13 @@
     /* Colors (RGB for opacity support) */
     --primary: #2ECC71;
     --primary-dark: #27AE60;
-    --secondary:#1A2533;
-
+    --secondary: #1A2533;
+    --accent-red: #EF4444;
+    --accent-blue: #3B82F6;
     --background-light: #FFFFFF;
     --background-dark: #111827;
 
-    --surface-light:#F9FAFB;
+    --surface-light: #F9FAFB;
     --surface-dark: #1F2937;
 
     /* Radius */
