@@ -65,7 +65,7 @@ const SignIn = () => {
 
             {/* Mobile Logo */}
             <div className="lg:hidden flex items-center justify-center gap-2 mb-6">
-              <GraduationCap className="text-primary w-10 h-10" />
+              <GraduationCap className="text-[#2ECC71] w-10 h-10" />
               <span className="text-2xl font-bold">MakSocial</span>
             </div>
 
@@ -87,7 +87,7 @@ const SignIn = () => {
                   <input
                     type="email"
                     defaultValue="student@makerere.ac.ug"
-                    className="w-full pl-10 py-2.5 rounded-lg bg-yellow-50 dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full pl-10 py-2.5 rounded-lg bg-yellow-50 dark:bg-gray-800 focus:ring-2 focus:ring-[#2ECC71] outline-none"
                   />
                 </div>
               </div>
@@ -98,7 +98,7 @@ const SignIn = () => {
                   <label className="text-sm font-medium">Password</label>
                   <a
                     href="#"
-                    className="text-sm text-primary hover:text-primary-hover"
+                    className="text-sm text-[#2ECC71] hover:text-[#2ECC71]/80"
                   >
                     Forgot password?
                   </a>
@@ -108,7 +108,7 @@ const SignIn = () => {
                   <input
                     type="password"
                     defaultValue="password123"
-                    className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-yellow-50 dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-yellow-50 dark:bg-gray-800 focus:ring-2 focus:ring-[#2ECC71] outline-none"
                   />
                   <Eye className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer" />
                 </div>
@@ -117,7 +117,7 @@ const SignIn = () => {
               {/* Submit */}
               <button
                 type="submit"
-                className="relative w-full flex justify-center py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-white font-semibold shadow-lg shadow-primary/30"
+                className="relative w-full flex justify-center py-2.5 rounded-lg bg-[#2ECC71] hover:bg-[#2ECC71]/80 text-white font-semibold shadow-lg shadow-[#2ECC71]/30"
               >
                 <LogIn className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-80" />
                 Sign In
@@ -128,7 +128,7 @@ const SignIn = () => {
               Don&apos;t have an account?{" "}
               <a
                 href="#"
-                className="font-semibold text-primary hover:text-primary-hover"
+                className="font-semibold text-[#2ECC71] hover:text-[#2ECC71]/80"
               >
                 Create an account
               </a>
