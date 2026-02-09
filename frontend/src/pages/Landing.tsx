@@ -21,6 +21,7 @@ import {
   ShieldCheck,
   ChevronRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const MakSocial: React.FC = () => {
   return (
@@ -54,9 +55,9 @@ const MakSocial: React.FC = () => {
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <a className="text-gray-700 dark:text-gray-200 font-bold hover:text-[#2ECC71] transition-colors" href="#">
+              <Link to="/login" className="text-gray-700 dark:text-gray-200 font-bold hover:text-[#2ECC71] transition-colors">
                 Log In
-              </a>
+              </Link>
               <a className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 px-6 py-2.5 rounded-xl font-bold hover:border-[#2ECC71] dark:hover:border-[#2ECC71] transition-all shadow-sm" href="#">
                 Sign Up Now
               </a>
