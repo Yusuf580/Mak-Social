@@ -58,7 +58,7 @@ const MakSocial: React.FC = () => {
               <Link to="/login" className="text-gray-700 dark:text-gray-200 font-bold hover:text-[#2ECC71] transition-colors">
                 Log In
               </Link>
-              <Link to="/register" className="bg-[#2ECC71] dark:bg-gray-800 text-white border border-gray-200 dark:border-gray-700 px-6 py-2.5 rounded-xl font-bold hover:border-[#2ECC71] dark:hover:border-[#2ECC71] transition-all shadow-sm" href="#">
+              <Link to="/register" className="bg-[#2ECC71] dark:bg-gray-800 text-white border border-gray-200 dark:border-gray-700 px-6 py-2.5 rounded-xl font-bold hover:border-[#2ECC71] dark:hover:border-[#2ECC71] transition-all shadow-sm">
                 Sign Up Now
               </Link>
             </div>
