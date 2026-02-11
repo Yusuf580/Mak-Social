@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import {
   Home,
-  Grid3x3,
-  BookOpen,
-  Calendar,
   MessageCircle,
-  HelpCircle,
-  Briefcase,
-  LogOut,
   Globe,
   ChevronDown,
   Search,
@@ -24,10 +18,7 @@ import {
   ArrowRight,
   Plus,
   Menu,
-  Users,
-  GraduationCap,
-  User,
-  Settings,
+  Sidebar,
 } from 'lucide-react';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
@@ -178,7 +169,7 @@ const Feed: React.FC = () => {
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div className="flex h-screen overflow-hidden bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-        
+        <Sidebar />
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col h-full overflow-hidden relative">
