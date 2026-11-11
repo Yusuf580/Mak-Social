@@ -37,6 +37,7 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setuserRole] = useState<"student" | "admin">("student");
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loginEmail, setLoginEmail] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeSector, setActiveSector] = useState<College | "Global">(
@@ -102,6 +103,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleLogin = (email: string) => {
+    setLoginEmail(email.trim());
     const users = db.getUsers();
     const existingUser = users.find((u) => u.email === email);
     if (existingUser) {
@@ -123,6 +125,7 @@ const App: React.FC = () => {
     college: College,
     status: UserStatus,
   ) => {
+    setLoginEmail(email.trim());
     const userId = Date.now().toString();
     const newUser: User = {
       id: userId,
@@ -155,6 +158,7 @@ const App: React.FC = () => {
     localStorage.removeItem("maksocial_current_user_id");
     setIsLoggedIn(false);
     setCurrentUser(null);
+    setLoginEmail("");
     setView("landing");
   };
 
@@ -171,7 +175,7 @@ const App: React.FC = () => {
   }
 
   if (isLoggedIn && userRole === "admin") {
-    return <Admin onLogout={handleLogout} />;
+    return <Admin onLogout={handleLogout} adminEmail={loginEmail} />;
   }
 
   const renderContent = () => {

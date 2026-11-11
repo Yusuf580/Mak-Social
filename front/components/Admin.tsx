@@ -20,10 +20,28 @@ import {
   Eye, Download, Palette, Type, Globe, Sun, Moon,
   AlertCircle, Clock, ChevronDown, Reply, ReplyAll, Forward,
   File, Image as ImageIcon, RotateCw, Trash, MoreHorizontal,
-  ChevronUp, ExternalLink, Printer
+  ChevronUp, ExternalLink, Printer, ShieldAlert, CheckCircle2
 } from 'lucide-react';
 
-const Admin: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
+interface ModerationItem {
+  id: string;
+  user_id: string;
+  author?: string;
+  content: string;
+  images?: string[];
+  college: string;
+  created_at: number;
+  reason: string;
+  categories: string[];
+}
+
+const MODERATION_API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const PROHIBITED_MODERATION_CATEGORIES = new Set([
+  'weapon', 'weapons', 'firearm', 'firearms',
+  'alcohol', 'tobacco', 'nicotine', 'drug', 'drugs', 'violence'
+]);
+
+const Admin: React.FC<{ onLogout?: () => void; adminEmail?: string }> = ({ onLogout, adminEmail = '' }) => {
   const [activeTab, setActiveTab] = useState('Email');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [customizerOpen, setCustomizerOpen] = useState(false);
@@ -39,10 +57,59 @@ const Admin: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
   const [emails, setEmails] = useState<PlatformEmail[]>([]);
   const [selectedEmail, setSelectedEmail] = useState<PlatformEmail | null>(null);
   const [emailFolder, setEmailFolder] = useState<PlatformEmail['folder']>('inbox');
+  const [moderationItems, setModerationItems] = useState<ModerationItem[]>([]);
+  const [moderationLoading, setModerationLoading] = useState(false);
+  const [moderationError, setModerationError] = useState('');
+  const [moderationMessage, setModerationMessage] = useState('');
+  const [reviewingId, setReviewingId] = useState<string | null>(null);
+
+  const loadModeration = async () => {
+    setModerationLoading(true);
+    setModerationError('');
+    try {
+      const response = await fetch(`${MODERATION_API}/admin/moderation`, {
+        headers: { 'x-admin-email': adminEmail },
+        signal: AbortSignal.timeout(8000)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Could not load the moderation queue.');
+      setModerationItems(result);
+    } catch (error) {
+      setModerationError(error instanceof Error ? error.message : 'Could not load the moderation queue.');
+    } finally {
+      setModerationLoading(false);
+    }
+  };
+
+  const decideModeration = async (item: ModerationItem, action: 'approve' | 'reject') => {
+    setReviewingId(item.id);
+    setModerationError('');
+    setModerationMessage('');
+    try {
+      const response = await fetch(`${MODERATION_API}/admin/moderation/${encodeURIComponent(item.id)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-email': adminEmail },
+        body: JSON.stringify({ action }),
+        signal: AbortSignal.timeout(8000)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Could not save this decision.');
+      setModerationItems(items => items.filter(queueItem => queueItem.id !== item.id));
+      setModerationMessage(action === 'approve' ? 'Post approved and published.' : 'Post rejected and removed from the queue.');
+    } catch (error) {
+      setModerationError(error instanceof Error ? error.message : 'Could not save this decision.');
+    } finally {
+      setReviewingId(null);
+    }
+  };
 
   useEffect(() => {
     setEmails(db.getEmails());
   }, []);
+
+  useEffect(() => {
+    void loadModeration();
+  }, [adminEmail]);
 
   const handleReadEmail = (email: PlatformEmail) => {
     setSelectedEmail(email);
@@ -128,6 +195,7 @@ const Admin: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
               { id: 'Dashboard', icon: <LayoutDashboard size={18}/> },
               { id: 'Users', icon: <Users size={18}/> },
               { id: 'Email', icon: <Inbox size={18}/> },
+              { id: 'Moderation', icon: <ShieldAlert size={18}/> },
               { id: 'Security', icon: <Shield size={18}/> },
             ].map(item => (
               <button 
@@ -137,6 +205,11 @@ const Admin: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
               >
                 {item.icon}
                 {isSidebarOpen && <span className="ml-4 text-[11px] font-black uppercase tracking-widest">{item.id}</span>}
+                {item.id === 'Moderation' && moderationItems.length > 0 && (
+                  <span className="ml-auto min-w-5 rounded-full bg-rose-500 px-1.5 py-0.5 text-center text-[9px] font-black text-white">
+                    {moderationItems.length}
+                  </span>
+                )}
               </button>
             ))}
           </nav>
@@ -376,6 +449,89 @@ const Admin: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
                   </div>
                 </div>
               </div>
+            )}
+
+            {activeTab === 'Moderation' && (
+              <section className="mx-auto max-w-[1200px] space-y-6 animate-in fade-in duration-300">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <h1 className="text-2xl font-black text-slate-900 dark:text-white">Post moderation</h1>
+                    <p className="mt-2 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
+                      Flagged posts stay hidden until reviewed. Reject posts promoting or depicting weapons, alcohol, recreational drugs, tobacco, or graphic violence.
+                    </p>
+                  </div>
+                  <button onClick={() => void loadModeration()} disabled={moderationLoading} className="inline-flex items-center justify-center gap-2 border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 transition-colors hover:border-[#007bff] hover:text-[#007bff] disabled:opacity-50 dark:border-[#30363d] dark:bg-[#161b22] dark:text-slate-200">
+                    <RotateCw size={14} className={moderationLoading ? 'animate-spin' : ''}/>
+                    Refresh queue
+                  </button>
+                </div>
+
+                {moderationError && (
+                  <div role="alert" className="flex items-start gap-3 border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800 dark:border-rose-900/60 dark:bg-rose-950/30 dark:text-rose-200">
+                    <AlertCircle size={17} className="mt-0.5 shrink-0"/>
+                    <span>{moderationError}</span>
+                  </div>
+                )}
+                {moderationMessage && (
+                  <div role="status" className="flex items-center gap-3 border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/30 dark:text-emerald-200">
+                    <CheckCircle2 size={17} className="shrink-0"/>
+                    <span>{moderationMessage}</span>
+                  </div>
+                )}
+
+                {moderationLoading && moderationItems.length === 0 ? (
+                  <div className="border border-slate-200 bg-white px-6 py-12 text-center text-sm text-slate-500 dark:border-[#30363d] dark:bg-[#161b22] dark:text-slate-400">Loading review queue…</div>
+                ) : moderationItems.length === 0 && !moderationError ? (
+                  <div className="border border-slate-200 bg-white px-6 py-16 text-center dark:border-[#30363d] dark:bg-[#161b22]">
+                    <ShieldAlert size={30} className="mx-auto text-emerald-500"/>
+                    <h2 className="mt-4 text-base font-bold text-slate-900 dark:text-white">The queue is clear</h2>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Flagged posts will appear here for a decision.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {moderationItems.map(item => (
+                      <article key={item.id} className="border border-slate-200 bg-white dark:border-[#30363d] dark:bg-[#161b22]">
+                        { /* A backend check also blocks approval for these policy categories. */ }
+                        {item.categories.some(category => PROHIBITED_MODERATION_CATEGORIES.has(category.toLowerCase())) && (
+                          <div className="border-b border-rose-200 bg-rose-50 px-5 py-3 text-xs font-bold text-rose-800 dark:border-rose-900/60 dark:bg-rose-950/30 dark:text-rose-200">
+                            Prohibited category: reject this post; approval is disabled by policy.
+                          </div>
+                        )}
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4 dark:border-[#30363d]">
+                          <div className="flex min-w-0 items-center gap-3">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300"><AlertCircle size={17}/></div>
+                            <div className="min-w-0">
+                              <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{item.author || item.user_id}</p>
+                              <p className="text-xs text-slate-500">{item.college || 'Global'} · {new Date(item.created_at).toLocaleString()}</p>
+                            </div>
+                          </div>
+                          <span className="border border-amber-200 bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-200">Needs review</span>
+                        </div>
+                        <div className="space-y-4 px-5 py-5">
+                          <p className="whitespace-pre-wrap break-words text-sm leading-6 text-slate-800 dark:text-slate-200">{item.content}</p>
+                          {item.images && item.images.length > 0 && (
+                            <div className="flex flex-wrap gap-3">
+                              {item.images.map((image, index) => (
+                                <img key={`${item.id}-image-${index}`} src={image} alt={`Attached image ${index + 1}`} className="max-h-72 max-w-full border border-slate-200 object-contain dark:border-[#30363d]" />
+                              ))}
+                            </div>
+                          )}
+                          <div className="space-y-1 border-l-2 border-amber-400 pl-3">
+                            <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">{item.reason || 'Flagged for administrator review.'}</p>
+                            {item.categories?.length > 0 && <p className="text-[11px] text-slate-500">Review labels: {item.categories.join(', ')}</p>}
+                          </div>
+                          <div className="flex flex-wrap justify-end gap-2 border-t border-slate-100 pt-4 dark:border-[#30363d]">
+                            <button onClick={() => void decideModeration(item, 'reject')} disabled={reviewingId === item.id} className="border border-rose-200 px-4 py-2 text-xs font-bold text-rose-700 hover:bg-rose-50 disabled:opacity-50 dark:border-rose-900/60 dark:text-rose-300 dark:hover:bg-rose-950/30">Reject</button>
+                            {!item.categories.some(category => PROHIBITED_MODERATION_CATEGORIES.has(category.toLowerCase())) && (
+                              <button onClick={() => void decideModeration(item, 'approve')} disabled={reviewingId === item.id} className="bg-[#007bff] px-4 py-2 text-xs font-bold text-white hover:bg-[#0069d9] disabled:opacity-50">Approve and publish</button>
+                            )}
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </section>
             )}
 
             {activeTab === 'Dashboard' && (

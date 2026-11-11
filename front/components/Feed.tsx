@@ -267,12 +267,15 @@ const Feed: React.FC<FeedProps> = ({
   const [toasts, setToasts] = useState<ToastMsg[]>([]);
 
   useEffect(() => {
-    const sync = () => {
-      const allPosts = db.getPosts();
-      setPosts(allPosts);
+    const sync = async () => {
+      try {
+        setPosts(await db.syncPosts());
+      } catch {
+        setPosts(db.getPosts());
+      }
       setBookmarks(db.getBookmarks());
     };
-    sync();
+    void sync();
     const interval = setInterval(sync, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -305,8 +308,21 @@ const Feed: React.FC<FeedProps> = ({
       college: collegeFilter === 'Global' ? currentUser.college : collegeFilter,
       pollData
     };
-    db.addPost(newPost);
-    setPosts(db.getPosts());
+    try {
+      const result = await db.addPost(newPost);
+      if (result.status === 'pending_review') {
+        addToast('warning', result.reason || 'Your post is waiting for administrator review.');
+        return;
+      }
+      addToast('success', 'Your post passed review and was published.');
+      try {
+        setPosts(await db.syncPosts());
+      } catch {
+        setPosts(db.getPosts());
+      }
+    } catch (error) {
+      addToast('error', error instanceof Error ? error.message : 'Your post could not be submitted.');
+    }
   };
 
   const handleLike = (id: string) => {

@@ -2,6 +2,8 @@
 import { Post, User, College, UserStatus, Resource, CalendarEvent, MakNotification, PlatformEmail, ChatConversation, LiveEvent, Group, GroupMessage, LostFoundItem } from './types';
 import { MOCK_POSTS, MOCK_CHATS } from './constants';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const DB_KEYS = {
   POSTS: 'maksocial_posts_v27_populated',
   USERS: 'maksocial_users_v26_registry',
@@ -55,7 +57,62 @@ export const db = {
   },
   getPosts: (): Post[] => parseArray<Post>(DB_KEYS.POSTS, MOCK_POSTS),
   savePosts: (posts: Post[]) => localStorage.setItem(DB_KEYS.POSTS, JSON.stringify(posts)),
-  addPost: (post: Post) => db.savePosts([post, ...db.getPosts()]),
+  syncPosts: async (): Promise<Post[]> => {
+    const response = await fetch(`${API_URL}/posts`, { signal: AbortSignal.timeout(5000) });
+    if (!response.ok) throw new Error('Could not load posts from the server.');
+    const rows = await response.json();
+    const users = db.getUsers();
+    const posts: Post[] = rows.map((row: any) => {
+      const author = users.find(user => user.id === row.user_id);
+      return {
+        id: row.id,
+        author: author?.name || 'MakSocial member',
+        authorId: row.user_id,
+        authorRole: author?.role || 'Member',
+        authorAvatar: author?.avatar || '',
+        timestamp: row.timestamp ? new Date(Number(row.timestamp)).toLocaleString() : 'Recently',
+        content: row.content || '',
+        hashtags: [],
+        likes: Number(row.likes || 0),
+        commentsCount: Number(row.comments_count || 0),
+        comments: [],
+        views: 0,
+        flags: [],
+        isOpportunity: Boolean(row.is_opportunity),
+        college: row.college || 'Global'
+      };
+    });
+    const serverPostIds = new Set(posts.map(post => post.id));
+    const mergedPosts = [...posts, ...db.getPosts().filter(post => !serverPostIds.has(post.id))];
+    db.savePosts(mergedPosts);
+    return mergedPosts;
+  },
+  addPost: async (post: Post): Promise<{ status: 'published' | 'pending_review'; reason?: string }> => {
+    const formData = new FormData();
+    formData.append('id', post.id);
+    formData.append('userId', post.authorId);
+    formData.append('authorName', post.author);
+    formData.append('authorAvatar', post.authorAvatar);
+    formData.append('content', post.content);
+    formData.append('college', post.college || 'Global');
+    formData.append('isOpportunity', post.isOpportunity ? 'true' : 'false');
+
+    let response: Response;
+    try {
+      response = await fetch(`${API_URL}/posts`, { method: 'POST', body: formData, signal: AbortSignal.timeout(20000) });
+    } catch {
+      throw new Error('Post review is unavailable. Please try again when the server is running.');
+    }
+
+    const result = await response.json().catch(() => ({}));
+    if (response.status === 202 && result.status === 'pending_review') {
+      return { status: 'pending_review', reason: result.reason };
+    }
+    if (!response.ok) throw new Error(result.error || 'Your post could not be submitted.');
+
+    db.savePosts([post, ...db.getPosts().filter(existing => existing.id !== post.id)]);
+    return { status: 'published' };
+  },
   likePost: (postId: string) => db.savePosts(db.getPosts().map(p => p.id === postId ? { ...p, likes: p.likes + 1 } : p)),
   addComment: (postId: string, comment: any) => db.savePosts(db.getPosts().map(p => p.id === postId ? { ...p, comments: [...(p.comments || []), comment], commentsCount: (p.commentsCount || 0) + 1 } : p)),
   toggleBookmark: (postId: string) => {
